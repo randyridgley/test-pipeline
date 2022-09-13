@@ -1,4 +1,4 @@
-AWSAccountID: "XXXXXXXXXXXX"
+AWSAccountID: "649037252677"
 AWSProfileName: "default"
 AWSProfileRegion: "us-east-1"
 
@@ -7,7 +7,7 @@ Environment: "Build"
 Version: "0.0.0"
 Build: "0"
 
-GithubSecretName: "CDKPipelines/Build/GithubSecret"
+GithubSecretName: "CDKPipelines/Dev/GithubSecret"
 GithubRepo: "{org}/{repo}"
 GithubBranch: "main"
 
