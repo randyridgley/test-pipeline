@@ -35,6 +35,7 @@ new CdkpipelinesDemoPipelineStack(app, defaultStackName, {
     region: buildConfig.AWSProfileRegion,
     account: buildConfig.AWSAccountID,
   },
+  pipelineName: 'TestPipeline'
 }, buildConfig);
 
 app.synth();

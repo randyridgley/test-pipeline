@@ -1,6 +1,6 @@
 import { Aspects, NestedStack, NestedStackProps, Stack, StackProps, Tags } from 'aws-cdk-lib';
-import { DashboardRenderingPreference, DefaultDashboardFactory, MonitoringFacade } from 'cdk-monitoring-constructs';
-import { AwsSolutionsChecks } from 'cdk-nag';
+import { DefaultDashboardFactory, MonitoringFacade } from 'cdk-monitoring-constructs';
+import { AwsSolutionsChecks, NagSuppressions } from 'cdk-nag';
 import { Construct } from 'constructs';
 import { BuildConfig } from '../environment/build-config';
 
@@ -29,11 +29,9 @@ export class BaseStack extends Stack {
       dashboardNamePrefix: props.dashboardName ?? `${id}-dashboard`,
       createDashboard: true,
       createAlarmDashboard: true,
-      createSummaryDashboard: true,
-      renderingPreference: DashboardRenderingPreference.INTERACTIVE_AND_BITMAP,
-    },
-    );
-
+      createSummaryDashboard: true,      
+    });
+    
     this.monitoring = new MonitoringFacade(this, 'MonitoringFacade', {
       alarmFactoryDefaults: {
         alarmNamePrefix: props.alarmNamePrefix ?? `${id}-alarms`,
@@ -46,6 +44,24 @@ export class BaseStack extends Stack {
       dashboardFactory,
     });
 
+    NagSuppressions.addResourceSuppressions(
+      this.monitoring,
+      [
+        {
+          id: 'AwsSolutions-L1',
+          reason: 'External library CDK Monitoring Constructs is setting the version of the lambda function.',
+        },
+        {
+          id: 'AwsSolutions-IAM4',
+          reason: 'MonitoringFacade in CDK Monitoring Constructs is using the managed policy service-role/AWSLambdaBasicExecutionRole in its code base to create Lambda functions.'
+        },
+        {
+          id: 'AwsSolutions-IAM5',
+          reason: 'MonitoringFacade in CDK Monitoring Constructs is creating policies with *.'
+        }
+      ],
+      true,
+    );
     Aspects.of(this).add(new AwsSolutionsChecks({ verbose: true }));
   }
 }

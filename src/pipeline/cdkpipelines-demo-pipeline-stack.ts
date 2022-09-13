@@ -6,7 +6,7 @@ import { CdkpipelinesDemoStage } from './cdkpipelines-demo-stage';
 
 
 export interface CdkpipelinesDemoPipelineStackProps extends StackProps {
-
+  readonly pipelineName: string
 }
 /**
  * The stack that defines the application pipeline
@@ -17,7 +17,7 @@ export class CdkpipelinesDemoPipelineStack extends Stack {
 
     const pipeline = new CodePipeline(this, 'Pipeline', {
       // The pipeline name
-      pipelineName: 'ServicePipeline',
+      pipelineName: props.pipelineName,
 
       // Required for cross account access to S3
       crossAccountKeys: true,
