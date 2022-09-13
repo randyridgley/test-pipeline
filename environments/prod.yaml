@@ -1,0 +1,15 @@
+AWSAccountID: "XXXXXXXXXXXX"
+AWSProfileName: "default"
+AWSProfileRegion: "us-west-2"
+
+App: "ProdApplication"
+Environment: "prod"
+Version: "0.0.0"
+Build: "0"
+
+GithubSecretName: "ApplicationName/Prod/GithubSecret"
+GithubRepo: "organization/repo"
+GithubBranch: "main"
+
+Parameters:
+  TestParameter: "ProdFooBar"

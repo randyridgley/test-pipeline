@@ -1,0 +1,15 @@
+AWSAccountID: "XXXXXXXXXXXX"
+AWSProfileName: "default"
+AWSProfileRegion: "us-east-1"
+
+App: "DevApplication"
+Environment: "dev"
+Version: "0.0.0"
+Build: "0"
+
+GithubSecretName: "ApplicationName/Dev/GithubSecret"
+GithubRepo: "organization/repo"
+GithubBranch: "main"
+
+Parameters:
+  TestParameter: "DevFooBar"
